@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="36">
+ <tileset firstgid="1" source="map.tsx"/>
+ <tileset firstgid="1981" source="../objects/objects.tsx"/>
+ <layer id="1" name="base" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJytlUEOgDAIBBv16C/8nOd+rF/0IglpWLpAD3vSMuwW9D1aex09p6/MGaYGqlVlRdiVXCzO7h6GoWpG92XLYmlV8hLGfAb14on1z+TK5D3X97xb/nbNX+QsyinLZ9+vcLO7LNwBauzgznX6PxtobyL3H/XcDW5m7jJZy/1a3yG9n5VvFeKiOsLUXMSOSrirnjWTmb3Vc+131z6xflezE/nXsD1Y3EiO2R48vyz/A36ovIM=
+  </data>
+ </layer>
+ <layer id="3" name="detalhes" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20JT6AAAHgaCWAAAQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="objects">
+  <object id="2" name="Player" gid="1983" x="77.6667" y="276.667" width="32" height="32">
+   <properties>
+    <property name="life" type="float" value="10"/>
+    <property name="speed" type="float" value="3"/>
+    <property name="tt" type="class" propertytype="classTest"/>
+   </properties>
+  </object>
+  <object id="3" gid="1982" x="37" y="245.5" width="41" height="63"/>
+  <object id="4" gid="1982" x="179" y="180.5" width="41" height="63"/>
+  <object id="5" gid="1982" x="150.5" y="42.5" width="41" height="63"/>
+  <object id="6" gid="1981" x="312.5" y="188.5" width="80" height="112"/>
+  <object id="7" gid="1982" x="283.5" y="181.5" width="41" height="63"/>
+  <object id="8" gid="1982" x="265" y="173.5" width="41" height="63"/>
+  <object id="9" gid="1982" x="285" y="157" width="41" height="63"/>
+  <object id="10" gid="1982" x="373" y="180.5" width="41" height="63"/>
+  <object id="11" gid="1982" x="392.5" y="177" width="41" height="63"/>
+  <object id="12" gid="1982" x="377" y="155" width="41" height="63"/>
+  <object id="13" gid="1982" x="412" y="27" width="41" height="63"/>
+  <object id="14" gid="1982" x="429" y="41.5" width="41" height="63"/>
+  <object id="15" gid="1982" x="445.5" y="32" width="41" height="63"/>
+  <object id="16" gid="1982" x="459.5" y="41" width="41" height="63"/>
+  <object id="17" gid="1982" x="123.5" y="281.5" width="41" height="63"/>
+  <object id="18" gid="1982" x="47.5" y="310" width="41" height="63"/>
+  <object id="19" gid="1982" x="21.5" y="258.5" width="41" height="63"/>
+  <object id="20" gid="1982" x="4.5" y="247.5" width="41" height="63"/>
+  <object id="21" gid="1982" x="-14.5" y="252" width="41" height="63"/>
+  <object id="22" gid="1982" x="-6.5" y="292" width="41" height="63"/>
+  <object id="23" gid="1982" x="22" y="292" width="41" height="63"/>
+  <object id="24" gid="1982" x="5" y="307.5" width="41" height="63"/>
+  <object id="25" gid="1982" x="30" y="311.5" width="41" height="63"/>
+  <object id="26" gid="1982" x="133" y="328" width="41" height="63"/>
+  <object id="28" gid="1982" x="115" y="316" width="41" height="63"/>
+  <object id="29" gid="1982" x="105.5" y="331" width="41" height="63"/>
+  <object id="30" gid="1982" x="-15" y="34.5" width="41" height="63"/>
+  <object id="31" gid="1982" x="-3" y="20" width="41" height="63"/>
+  <object id="32" gid="1982" x="8" y="35.5" width="41" height="63"/>
+  <object id="34" gid="1982" x="297.5" y="199.5" width="41" height="63"/>
+  <object id="35" gid="1982" x="360.5" y="199" width="41" height="63"/>
+ </objectgroup>
+</map>

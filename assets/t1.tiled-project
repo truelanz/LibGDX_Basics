@@ -1,0 +1,43 @@
+{
+    "automappingRulesFile": "",
+    "commands": [
+    ],
+    "compatibilityVersion": 1100,
+    "extensionsPath": "extensions",
+    "folders": [
+        "."
+    ],
+    "properties": [
+    ],
+    "propertyTypes": [
+        {
+            "id": 1,
+            "name": "enum",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "test"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "color": "#ffa0a0a4",
+            "drawFill": true,
+            "id": 2,
+            "members": [
+                {
+                    "name": "test1",
+                    "type": "float",
+                    "value": 10
+                }
+            ],
+            "name": "classTest",
+            "type": "class",
+            "useAs": [
+                "property",
+                "tileset",
+                "project"
+            ]
+        }
+    ]
+}

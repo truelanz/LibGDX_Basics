@@ -1,0 +1,60 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "maps/main.tmx",
+    "expandedProjectPaths": [
+        ".",
+        "objects",
+        "maps"
+    ],
+    "fileStates": {
+        "maps/main.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 239.66666666666669,
+                "y": 177.33333333333334
+            }
+        },
+        "maps/map.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "maps/objects/objects.tsx": {
+            "scaleInDock": 1
+        },
+        "objects/objects.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "E:/Users/lanro/JAVA/JOGOS/t1/assets/asset",
+    "map.lastUsedFormat": "tmx",
+    "map.layerDataFormat": "3",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "openFiles": [
+        "maps/main.tmx",
+        "maps/map.tsx",
+        "objects/objects.tsx"
+    ],
+    "project": "t1.tiled-project",
+    "property.type": "classTest",
+    "recentFiles": [
+        "objects/objects.tsx",
+        "maps/map.tsx",
+        "maps/main.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.margin": 8,
+    "tileset.spacing": 16,
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    },
+    "tileset.type": 1
+}
