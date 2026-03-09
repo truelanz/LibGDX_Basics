@@ -5,13 +5,15 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.truelanz.test1.asset.AssetService;
 import com.truelanz.test1.asset.MapAsset;
 import com.truelanz.test1.systyem.RenderSystem;
+import com.truelanz.test1.tiled.TiledService;
 
-import static com.truelanz.test1.T1game.UNIT_SCALE;
+import java.util.function.Consumer;
 
 /** First screen of the application. Displayed after the application is created. */
 public class FirstScreen extends ScreenAdapter {
@@ -21,6 +23,7 @@ public class FirstScreen extends ScreenAdapter {
     private final Viewport viewport;
     private final OrthographicCamera camera;
     private final Engine engine;
+    private final TiledService tiledService;
 
     public FirstScreen(T1game game) {
         this.game = game;
@@ -28,16 +31,20 @@ public class FirstScreen extends ScreenAdapter {
         this.viewport = game.getViewport();
         this.camera = game.getCamera();
         this.batch = game.getBatch();
+        this.tiledService = new TiledService(this.assetService);
 
         this.engine = new Engine();
-        this.engine.addSystem(new RenderSystem(this.batch, this.viewport, this.assetService));
+        this.engine.addSystem(new RenderSystem(this.batch, this.viewport, this.camera));
 
     }
 
     @Override
     public void show() {
-        this.assetService.load(MapAsset.MAIN);
-        this.engine.getSystem(RenderSystem.class).setMap(this.assetService.get(MapAsset.MAIN));
+        Consumer<TiledMap> renderConsumer = this.engine.getSystem(RenderSystem.class)::setMap;
+        this.tiledService.setMapChangeConsumer(renderConsumer);
+
+        TiledMap tiledMap = this.tiledService.loadMap(MapAsset.MAIN);
+        this.tiledService.setMap(tiledMap);
     }
 
     @Override

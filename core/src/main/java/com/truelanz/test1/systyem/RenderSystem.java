@@ -12,7 +12,6 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.truelanz.test1.asset.AssetService;
 import com.truelanz.test1.component.Graphic;
 import com.truelanz.test1.component.Transform;
 
@@ -27,16 +26,14 @@ public class RenderSystem extends SortedIteratingSystem implements Disposable {
     private final Viewport viewport;
     private final OrthographicCamera camera;
 
-
-
-    public RenderSystem(Batch batch, Viewport viewport, AssetService assetService) {
+    public RenderSystem(Batch batch, Viewport viewport, OrthographicCamera camera) {
         super(
             Family.all(Transform.class, Graphic.class).get(),
             Comparator.comparing(Transform.MAPPER::get)
         );
         this.batch = batch;
         this.viewport = viewport;
-        this.camera = (OrthographicCamera) viewport.getCamera();
+        this.camera = camera;
         this.mapRenderer = new OrthogonalTiledMapRenderer(null, UNIT_SCALE, this.batch);
     }
 
@@ -76,6 +73,10 @@ public class RenderSystem extends SortedIteratingSystem implements Disposable {
         );
     }
 
+    /**
+    * Recupera propriedades das camadas do Tiled
+    * @param tiledMap TiledMap
+    */
     public void setMap(TiledMap tiledMap) {
         this.mapRenderer.setMap(tiledMap);
     }

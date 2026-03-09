@@ -5,9 +5,9 @@
     },
     "activeFile": "maps/main.tmx",
     "expandedProjectPaths": [
-        ".",
+        "maps",
         "objects",
-        "maps"
+        "."
     ],
     "fileStates": {
         "maps/0001_lava.tsx": {
@@ -22,10 +22,10 @@
         },
         "maps/main.tmx": {
             "scale": 1.5,
-            "selectedLayer": 2,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 239.66666666666669,
-                "y": 177.33333333333334
+                "x": 212.66666666666666,
+                "y": 262.6666666666667
             }
         },
         "maps/map.tsx": {
@@ -56,11 +56,11 @@
     "project": "t1.tiled-project",
     "property.type": "classTest",
     "recentFiles": [
-        "maps/lava.tsx",
-        "maps/0001_lava.tsx",
         "objects/objects.tsx",
         "maps/map.tsx",
-        "maps/main.tmx"
+        "maps/main.tmx",
+        "maps/lava.tsx",
+        "maps/0001_lava.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.margin": 8,
