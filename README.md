@@ -34,7 +34,6 @@ Player = Entity 1
 Enemy = Entity 2
 Bullet = Entity 3
 ```
-
 Uma entidade é basicamente um **container de componentes**.
 
 ---
@@ -90,7 +89,6 @@ Perceba:
 ---
 
 # 3️⃣ System (Sistema)
-
 Os **systems contêm a lógica do jogo**.
 
 Eles processam entidades que possuem determinados componentes.
@@ -145,7 +143,6 @@ Cada sistema processa apenas os componentes necessários.
 ---
 
 ## Exemplo
-
 Entidade **Player**:
 
 ```
@@ -169,10 +166,6 @@ Sistemas que atuam nela:
 ```
 Entity + Components
 ```
-
-Muito mais flexível.
-
----
 
 ### Melhor performance
 
@@ -215,11 +208,43 @@ Engine
  ├ Components
  └ Systems
 ```
-# 🧠 Regra mental:
+## Regra :
 
 **Entity = ID**
 **Component = Dados**
 **System = Lógica**
+
+---
+
+## Resolver lentidão para executar programa:
+
+1 — Daemon do Gradle desativado!?
+
+No `gradle.properties:`
+propertiesorg.gradle.daemon=false  ← esse é pode ser problema principal.
+Com o daemon desativado, o Gradle inicia uma JVM do zero toda execução, o que custa vários segundos.
+
+Correção:
+`propertiesorg.gradle.daemon=true`
+O daemon fica em memória entre execuções e as subsequentes ficam muito mais rápidas.
+
+2 — Memória muito baixa
+`propertiesorg.gradle.jvmargs=-Xms512M -Xmx1G` ← pode ser pouco dependendo da máquina
+Se a máquina tiver RAM disponível, aumentar:
+`propertiesorg.gradle.jvmargs=-Xms512M -Xmx2G`
+
+### Configurar no intelliJ:
+```
+3 — Rodar direto pela IDE em vez de Gradle
+Se estiver usando **IntelliJ IDEA**, configure para rodar diretamente pela IDE:
+Settings → Build, Execution, Deployment → Build Tools → Gradle`
+
+Mudar:
+Build and run using: Gradle  →  IntelliJ IDEA
+Run tests using:     Gradle  →  IntelliJ IDEA
+```
+
+- Isso elimina o overhead do Gradle no run e cai para 2~4 segundos.
 
 ---
 

@@ -37,15 +37,27 @@ public class RenderSystem extends SortedIteratingSystem implements Disposable {
         this.mapRenderer = new OrthogonalTiledMapRenderer(null, UNIT_SCALE, this.batch);
     }
 
+    private boolean sortDirty = false;
+    public void markSortDirty() {
+        this.sortDirty = true;
+    }
+
+    // ex: player muda de layer ao entrar em uma casa (z: 0 → 2)
+    //transform.setZ(2);
+    //renderSystem.markSortDirty(); // avisa que precisa reordenar
+
     @Override
     public void update(float deltaTime) {
-
         this.viewport.apply();
-        this.batch.setColor(Color.WHITE); //renderiza cores iguais do Tiled
-        this.mapRenderer.setView(this.camera); //renderiza o mapa
+        this.batch.setColor(Color.WHITE);
+        this.mapRenderer.setView(this.camera);
         this.mapRenderer.render();
 
-        forceSort();
+        if (sortDirty) {
+            forceSort();
+            sortDirty = false;
+        }
+
         batch.begin();
         batch.setProjectionMatrix(this.camera.combined);
         super.update(deltaTime);

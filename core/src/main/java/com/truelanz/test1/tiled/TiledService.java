@@ -48,10 +48,8 @@ public class TiledService {
     }
 
     /**
-    * Define o mapa atual do jogo.
-    * <p>
-    * Descarrega o mapa anterior e notifica o consumidor de mudança de mapa.
-    * </p>
+    * Define o mapa atual do jogo.<p>
+    * Descarrega o mapa anterior e notifica o consumidor de mudança de mapa.</p>
     * @param map novo mapa ativo
     */
     public void setMap(TiledMap map) {
@@ -63,6 +61,7 @@ public class TiledService {
         if (this.mapChangeConsumer != null) {
             this.mapChangeConsumer.accept(this.currentMap);
         }
+        loadMapObjects(this.currentMap); //chama para carregar objetos do mapa
     }
 
     /**
