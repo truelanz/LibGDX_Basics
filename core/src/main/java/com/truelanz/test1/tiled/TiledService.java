@@ -23,7 +23,7 @@ public class TiledService {
     /** Consumidor chamado quando o mapa atual muda. */
     private Consumer<TiledMap> mapChangeConsumer;
     /** Consumidor responsável por processar objetos do mapa. */
-    private final Consumer<TiledMapTileMapObject> loadObjectConsumer;
+    private Consumer<TiledMapTileMapObject> loadObjectConsumer;
 
     /**
     * Cria o serviço de mapas.
@@ -82,7 +82,7 @@ public class TiledService {
     * @param mapLayer camada contendo objetos
     */
     private void loadObjectLayer(MapLayer mapLayer) {
-        if(loadObjectConsumer != null) return;
+        if(loadObjectConsumer == null) return;
 
         for (MapObject mapObject : mapLayer.getObjects()) {
             if(mapObject instanceof TiledMapTileMapObject tileMapObject) {
@@ -102,6 +102,10 @@ public class TiledService {
         this.mapChangeConsumer = mapChangeConsumer;
     }
 
+    public void setLoadObjectConsumer(Consumer<TiledMapTileMapObject> loadObjectConsumer) {
+        this.loadObjectConsumer = loadObjectConsumer;
+    }
+
     /**
     * Define manualmente o mapa atual.
     * @param currentMap mapa a ser definido como ativo
@@ -109,4 +113,5 @@ public class TiledService {
     public void setCurrrentMap(TiledMap currentMap) {
         this.currentMap = currentMap;
     }
+
 }

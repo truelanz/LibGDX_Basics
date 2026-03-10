@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.truelanz.test1.asset.AssetService;
+import com.truelanz.test1.tiled.TiledAshleyConfigurator;
 
 import java.util.HashMap;
 import java.util.Map;

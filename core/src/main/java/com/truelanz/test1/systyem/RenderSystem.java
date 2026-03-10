@@ -46,7 +46,10 @@ public class RenderSystem extends SortedIteratingSystem implements Disposable {
         this.mapRenderer.render();
 
         forceSort();
+        batch.begin();
+        batch.setProjectionMatrix(this.camera.combined);
         super.update(deltaTime);
+        batch.end();
     }
 
     @Override

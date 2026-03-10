@@ -13,11 +13,11 @@ public class Transform implements Component, Comparable<Transform> {
     private final int z; //plano da entity (layer)
     private float rotationDeg; //rotação em graus
 
-    public Transform(Vector2 position, Vector2 scaling, Vector2 size, int z, float rotationDeg) {
+    public Transform(Vector2 position, int z, Vector2 size, Vector2 scaling, float rotationDeg) {
         this.position = position;
-        this.scaling = scaling;
-        this.size = size;
         this.z = z;
+        this.size = size;
+        this.scaling = scaling;
         this.rotationDeg = rotationDeg;
     }
 
