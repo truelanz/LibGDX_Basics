@@ -248,6 +248,42 @@ Run tests using:     Gradle  →  IntelliJ IDEA
 
 ---
 
+## Criação de módulo gradle para geração de Atlas.
+
+- Criar novo diretório na src `/` do projeto: `utils`
+- Adicionar esse diretório no `include` de settings.gradle;
+- Criar arquivo build.gradle:
+``` java
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+eclipse.project.name = appName + '-util'
+
+dependencies {
+  api "com.badlogicgames.gdx:gdx:$gdxVersion"
+  api "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
+
+  if (enableGraalNative == 'true') {
+    implementation "io.github.berstanio?gdx-svmhelper-annotations:$graalHelperVersion"
+  }
+}
+```
+- Atualizar gradle na ide para subir novo módulo.
+- Criar diretório main/java/com...." Com nova classe:
+```java
+public class TexturePackerTool {
+
+    public static void main(String[] args) {
+        String inputDir = "assets/asset";
+        String outputDir = "assets/graphic";
+        String packFileName = "objects";
+
+        TexturePacker.process(inputDir, outputDir, packFileName);
+    }
+}
+```
+*Tasks gradle rodará de modo independente das outras do projeto.*
+
+---
 
 A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/libgdx/gdx-liftoff).
 

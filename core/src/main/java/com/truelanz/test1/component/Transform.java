@@ -55,8 +55,8 @@ public class Transform implements Component, Comparable<Transform> {
     public int compareTo(Transform other) {
         if (this.z != other.z)
             return Float.compare(this.z, other.z);
-        if (this.position.x != other.position.x)
-            return Float.compare(this.position.x, other.position.x);
-        return Float.compare(this.position.y, other.position.y);
+        if (this.position.y != other.position.y)
+            return Float.compare(other.position.y, this.position.y);
+        return Float.compare(this.position.x, other.position.x);
     }
 }
