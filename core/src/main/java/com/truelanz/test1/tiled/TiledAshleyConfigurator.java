@@ -3,12 +3,15 @@ package com.truelanz.test1.tiled;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.FileTextureData;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.truelanz.test1.T1game;
 import com.truelanz.test1.asset.AssetService;
+import com.truelanz.test1.asset.AtlasAsset;
 import com.truelanz.test1.component.Graphic;
 import com.truelanz.test1.component.Transform;
 
@@ -27,7 +30,7 @@ public class TiledAshleyConfigurator {
     public void onLoadObject(TiledMapTileMapObject tileMapObject) {
         Entity entity = this.engine.createEntity();
         TiledMapTile tile = tileMapObject.getTile();
-        TextureRegion textureRegion = tile.getTextureRegion();
+        TextureRegion textureRegion = getTextureRegion(tile);
         int z = tile.getProperties().get("z", 1, Integer.class);
 
         entity.add(new Graphic(textureRegion, Color.WHITE.cpy()));
@@ -56,6 +59,20 @@ public class TiledAshleyConfigurator {
         size.scl(T1game.UNIT_SCALE);
 
         entity.add(new Transform(position, z, size, scaling, 0f));
+    }
+
+    private TextureRegion getTextureRegion(TiledMapTile tile) {
+        String atlasAssetStr = tile.getProperties().get("atlasAsset", AtlasAsset.OBJECTS.name(), String.class);
+        AtlasAsset atlasAsset = AtlasAsset.valueOf(atlasAssetStr);
+        TextureAtlas textureAtlas = this.assetService.get(atlasAsset);
+        FileTextureData textureData = (FileTextureData) tile.getTextureRegion().getTexture().getTextureData();
+        String atlasKey = textureData.getFileHandle().nameWithoutExtension();
+        TextureAtlas.AtlasRegion region = textureAtlas.findRegion(atlasKey);
+        if(region != null) {
+            return region;
+        }
+
+        return tile.getTextureRegion();
     }
 
 }

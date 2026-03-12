@@ -11,7 +11,7 @@ public class TexturePackerTool {
 
     public static void main(String[] args) {
         String inputDir = "assets/asset";
-        String outputDir = "assets/graphic";
+        String outputDir = "assets/graphics";
         String packFileName = "objects";
 
         TexturePacker.process(inputDir, outputDir, packFileName);

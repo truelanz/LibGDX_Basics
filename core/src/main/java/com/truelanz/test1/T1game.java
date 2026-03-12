@@ -15,7 +15,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.truelanz.test1.asset.AssetService;
-import com.truelanz.test1.tiled.TiledAshleyConfigurator;
+import com.truelanz.test1.screen.LoadingScreen;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -75,8 +75,9 @@ public class T1game extends Game {
         this.glProfiler.enable();
         this.fpsLogger = new FPSLogger();
 
-        addScreen(new FirstScreen(this));
-        setScreen(FirstScreen.class);
+        //Seta tela loading inicial
+        addScreen(new LoadingScreen(this, assetService));
+        setScreen(LoadingScreen.class);
     }
 
     /**
@@ -95,6 +96,10 @@ public class T1game extends Game {
      */
     public void addScreen(Screen screen) {
         screenCache.put(screen.getClass(), screen);
+    }
+
+    public void removeScreen(Screen screen) {
+        screenCache.remove(screen.getClass());
     }
 
     /**
@@ -177,4 +182,5 @@ public class T1game extends Game {
     public Map<Class<? extends Screen>, Screen> getScreenCache() {
         return screenCache;
     }
+
 }

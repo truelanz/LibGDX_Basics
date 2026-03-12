@@ -1,4 +1,4 @@
-package com.truelanz.test1.systyem;
+package com.truelanz.test1.system;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
@@ -7,15 +7,20 @@ import com.badlogic.ashley.systems.SortedIteratingSystem;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.truelanz.test1.component.Graphic;
 import com.truelanz.test1.component.Transform;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 import static com.truelanz.test1.T1game.UNIT_SCALE;
 
@@ -25,6 +30,8 @@ public class RenderSystem extends SortedIteratingSystem implements Disposable {
     private final Batch batch;
     private final Viewport viewport;
     private final OrthographicCamera camera;
+    private final List<MapLayer> fdglayers;
+    private final List<MapLayer> bdglayers;
 
     public RenderSystem(Batch batch, Viewport viewport, OrthographicCamera camera) {
         super(
@@ -34,6 +41,8 @@ public class RenderSystem extends SortedIteratingSystem implements Disposable {
         this.batch = batch;
         this.viewport = viewport;
         this.camera = camera;
+        this.fdglayers = new ArrayList<>();
+        this.bdglayers = new ArrayList<>();
         this.mapRenderer = new OrthogonalTiledMapRenderer(null, UNIT_SCALE, this.batch);
     }
 
@@ -48,19 +57,23 @@ public class RenderSystem extends SortedIteratingSystem implements Disposable {
 
     @Override
     public void update(float deltaTime) {
+
+        AnimatedTiledMapTile.updateAnimationBaseTime();
+
         this.viewport.apply();
+        batch.begin();
         this.batch.setColor(Color.WHITE);
         this.mapRenderer.setView(this.camera);
-        this.mapRenderer.render();
+        bdglayers.forEach(mapRenderer::renderMapLayer);
 
         if (sortDirty) {
             forceSort();
             sortDirty = false;
         }
 
-        batch.begin();
-        batch.setProjectionMatrix(this.camera.combined);
         super.update(deltaTime);
+        this.batch.setColor(Color.WHITE);
+        fdglayers.forEach(mapRenderer::renderMapLayer);
         batch.end();
     }
 
@@ -94,6 +107,30 @@ public class RenderSystem extends SortedIteratingSystem implements Disposable {
     */
     public void setMap(TiledMap tiledMap) {
         this.mapRenderer.setMap(tiledMap);
+
+        /* Lógica de renderização de layer
+        Até encontrar os objects... layer vai ´para bdg, depois que encontra objects... layer vai para fdg.
+        Ex: bdglayers:
+            - Chão
+            - grama
+        --- objects: player ---
+        fdglayers:
+            - Árvore Cobrindo player
+            - Telhado */
+        List<MapLayer> currentLayers = bdglayers;
+        this.fdglayers.clear();
+        this.bdglayers.clear();
+        for(MapLayer layer : tiledMap.getLayers()) {
+            if ("objects".equals(layer.getName())) {
+                currentLayers = fdglayers;
+                continue;
+            }
+            //Se a layer NÃO for uma TiledMapTileLayer → ignore ela
+            if(!(layer instanceof TiledMapTileLayer)) {
+                continue;
+            }
+            currentLayers.add(layer);
+        }
     }
 
     @Override
