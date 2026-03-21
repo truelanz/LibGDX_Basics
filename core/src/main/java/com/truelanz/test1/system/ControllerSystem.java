@@ -16,29 +16,31 @@ public class ControllerSystem extends IteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         Controller controller = Controller.MAPPER.get(entity);
-        if(controller.getPressedCommands().isEmpty() && controller.getReleasedCommands().isEmpty()) {
+        if (controller.getPressedCommands().isEmpty() && controller.getReleasedCommands().isEmpty()) {
             return;
         }
 
-        for (Command command : controller.getReleasedCommands()) {
-            switch (command) {
-                case UP -> moveEntity(entity, 0f, 1f);
-                case DOWN -> moveEntity(entity, 0f, -1f);
-                case RIGHT -> moveEntity(entity, 1f, 0f);
-                case LEFT -> moveEntity(entity, -1f, 0f);
-            }
-        }
-        controller.getPressedCommands().clear();
-
+        // Pressed → move na direção correta
         for (Command command : controller.getPressedCommands()) {
             switch (command) {
-                case UP -> moveEntity(entity, 0f, -1f);
-                case DOWN -> moveEntity(entity, 0f, 1f);
-                case RIGHT -> moveEntity(entity, -1f, 0f);
-                case LEFT -> moveEntity(entity, 1f, 0f);
+                case UP    -> moveEntity(entity, 0f,  1f);
+                case DOWN  -> moveEntity(entity, 0f, -1f);
+                case RIGHT -> moveEntity(entity,  1f, 0f);
+                case LEFT  -> moveEntity(entity, -1f, 0f);
             }
         }
-        controller.getReleasedCommands().clear();
+        controller.getPressedCommands().clear(); // ← limpa o que iterou
+
+        // Released → cancela a direção
+        for (Command command : controller.getReleasedCommands()) {
+            switch (command) {
+                case UP    -> moveEntity(entity, 0f, -1f);
+                case DOWN  -> moveEntity(entity, 0f,  1f);
+                case RIGHT -> moveEntity(entity, -1f, 0f);
+                case LEFT  -> moveEntity(entity,  1f, 0f);
+            }
+        }
+        controller.getReleasedCommands().clear(); // ← limpa o que iterou
     }
 
     private void moveEntity(Entity entity, float directionX, float directionY) {

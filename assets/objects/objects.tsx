@@ -8,6 +8,9 @@
   <image source="../asset/oak_tree.png" width="41" height="63"/>
  </tile>
  <tile id="2">
+  <properties>
+   <property name="speed" type="float" value="4"/>
+  </properties>
   <image source="../asset/player.png" width="32" height="32"/>
  </tile>
 </tileset>

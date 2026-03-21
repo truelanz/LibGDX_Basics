@@ -8,6 +8,7 @@ import com.truelanz.test1.component.Move;
 import com.truelanz.test1.component.Transform;
 
 public class MoveSystem extends IteratingSystem {
+    private final Vector2 normalizedDirection = new Vector2();
 
     public MoveSystem() {
         super(Family.all(Move.class, Transform.class).get());
@@ -18,11 +19,12 @@ public class MoveSystem extends IteratingSystem {
         Move move = Move.MAPPER.get(entity);
         if(move.isRooted() || move.getDirection().isZero()) return;
 
+        normalizedDirection.set(move.getDirection()).nor();
         Transform transform = Transform.MAPPER.get(entity);
         Vector2 position = transform.getPosition();
         position.set(
-            position.x + move.getMaxSpeed() * move.getDirection().x * deltaTime,
-            position.y + move.getMaxSpeed() * move.getDirection().y * deltaTime
+            position.x + move.getMaxSpeed() * normalizedDirection.x * deltaTime,
+            position.y + move.getMaxSpeed() * normalizedDirection.y * deltaTime
         );
     }
 }
