@@ -12,7 +12,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.truelanz.test1.T1game;
 import com.truelanz.test1.asset.AssetService;
 import com.truelanz.test1.asset.AtlasAsset;
+import com.truelanz.test1.component.Controller;
 import com.truelanz.test1.component.Graphic;
+import com.truelanz.test1.component.Move;
 import com.truelanz.test1.component.Transform;
 
 /**
@@ -41,8 +43,24 @@ public class TiledAshleyConfigurator {
             tileMapObject.getScaleX(), tileMapObject.getScaleY(), //escala
             entity
         );
+        addEntityController(tileMapObject, entity);
+        addEntityMove(tile, entity);
 
         this.engine.addEntity(entity);
+    }
+
+    private void addEntityMove(TiledMapTile tile, Entity entity) {
+        float speed = tile.getProperties().get("speed", 0f, Float.class);
+        if(speed == 0f) return;
+
+        entity.add(new Move(speed));
+    }
+
+    private void addEntityController(TiledMapTileMapObject tileMapObject, Entity entity) {
+        Boolean controller = tileMapObject.getProperties().get("controller", false, Boolean.class);
+        if(!controller) return;
+
+        entity.add(new Controller());
     }
 
     private void addEntityTransform(

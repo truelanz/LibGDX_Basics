@@ -1,0 +1,39 @@
+package com.truelanz.test1.component;
+
+import com.badlogic.ashley.core.Component;
+import com.badlogic.ashley.core.ComponentMapper;
+import com.badlogic.gdx.math.Vector2;
+import com.truelanz.test1.input.Command;
+
+public class Move implements Component {
+    public static final ComponentMapper<Move> MAPPER = ComponentMapper.getFor(Move.class);
+
+    private float maxSpeed;
+    private final Vector2 direction;
+    private boolean isRooted;
+
+    public Move(float maxSpeed) {
+        this.maxSpeed = maxSpeed;
+        this.direction = new Vector2();
+    }
+
+    public float getMaxSpeed() {
+        return maxSpeed;
+    }
+
+    public void setMaxSpeed(float maxSpeed) {
+        this.maxSpeed = maxSpeed;
+    }
+
+    public Vector2 getDirection() {
+        return direction;
+    }
+
+    public boolean isRooted() {
+        return isRooted;
+    }
+
+    public void setRooted(boolean rooted) {
+        isRooted = rooted;
+    }
+}

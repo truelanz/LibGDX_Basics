@@ -1,9 +1,6 @@
 package com.truelanz.test1;
 
-import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
@@ -52,20 +49,22 @@ public class T1game extends Game {
     private AssetService assetService;
     /** Mede as coisas da GPU em tempo real, como Draw Calls, Vertices, texturas e Shaders...*/
     private GLProfiler glProfiler;
-
     private FPSLogger fpsLogger;
+    private InputMultiplexer inputMultiplexer;
+
     /** Cache de telas do jogo. */
     private final Map<Class<? extends Screen>, Screen> screenCache =
         new HashMap<Class<? extends Screen>, Screen>();
 
     /**
-     * Inicializa os componentes principais do jogo.
-     *
-     * <p>Executado após o LibGDX iniciar.</p>
-     */
+    * Inicializa os componentes principais do jogo.
+    * <p>Executado após o LibGDX iniciar.</p>
+    */
     @Override
     public void create() {
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
+        this.inputMultiplexer = new InputMultiplexer();
+        Gdx.input.setInputProcessor(inputMultiplexer);
 
         this.batch = new SpriteBatch();
         this.camera = new OrthographicCamera();
@@ -181,6 +180,17 @@ public class T1game extends Game {
     /** @return cache de telas */
     public Map<Class<? extends Screen>, Screen> getScreenCache() {
         return screenCache;
+    }
+
+    public void setInputProcessors(InputProcessor... processors) {
+        inputMultiplexer.clear();
+
+        //Retorna vazio caso for null para não o null não entrar dentro do for e addProcessor.
+        if (processors == null) return;
+
+        for (InputProcessor processor : processors) {
+            inputMultiplexer.addProcessor(processor);
+        }
     }
 
 }

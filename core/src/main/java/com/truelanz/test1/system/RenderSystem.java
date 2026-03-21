@@ -59,8 +59,8 @@ public class RenderSystem extends SortedIteratingSystem implements Disposable {
     public void update(float deltaTime) {
 
         AnimatedTiledMapTile.updateAnimationBaseTime();
-
         this.viewport.apply();
+
         batch.begin();
         this.batch.setColor(Color.WHITE);
         this.mapRenderer.setView(this.camera);

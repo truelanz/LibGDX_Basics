@@ -5,8 +5,8 @@
     },
     "activeFile": "maps/main.tmx",
     "expandedProjectPaths": [
-        "maps",
         ".",
+        "maps",
         "objects"
     ],
     "fileStates": {
@@ -21,11 +21,11 @@
             "scaleInEditor": 1
         },
         "maps/main.tmx": {
-            "scale": 1.5,
+            "scale": 3,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 244.99999999999997,
-                "y": 178.66666666666669
+                "x": 164.49999999999997,
+                "y": 241.66666666666666
             }
         },
         "maps/map.tsx": {
@@ -54,7 +54,7 @@
         "objects/objects.tsx"
     ],
     "project": "t1.tiled-project",
-    "property.type": "string",
+    "property.type": "float",
     "recentFiles": [
         "objects/objects.tsx",
         "maps/map.tsx",

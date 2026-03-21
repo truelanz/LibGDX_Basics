@@ -15,9 +15,7 @@
  <objectgroup id="4" name="objects">
   <object id="2" name="Player" gid="1983" x="70.4167" y="288.667" width="32" height="32">
    <properties>
-    <property name="life" type="float" value="10"/>
-    <property name="speed" type="float" value="3"/>
-    <property name="tt" type="class" propertytype="classTest"/>
+    <property name="atlasAsset" value="OBJECTS"/>
    </properties>
   </object>
   <object id="3" gid="1982" x="37" y="245.5" width="41" height="63"/>
